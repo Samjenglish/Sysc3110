@@ -10,9 +10,11 @@ public class AddressBook {
 		BuddyInfo buddy2 = new BuddyInfo("Austin");
 		BuddyInfo buddy3 = new BuddyInfo("Nikola");
 		System.out.println("Hey");
+		System.out.println("Hi");
 		Book1.addBuddy(buddy1);
 		Book1.addBuddy(buddy2);
 		Book1.addBuddy(buddy3);
+		Book1.removeBuddy(buddy3);
 	}
 	
 	public void addBuddy(BuddyInfo newBuddy) {
