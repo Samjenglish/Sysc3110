@@ -12,6 +12,11 @@ public class AddressBook {
 		Book1.removeBuddy(0);
 		
 	}
+	public void printName(BuddyInfo buddyName) {
+		if(buddyName != null) {
+			System.out.println(buddyName.getName());
+		}
+	}
 	
 	public void addBuddy(BuddyInfo newBuddy) {
 		if(newBuddy != null) {
