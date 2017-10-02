@@ -7,7 +7,7 @@ public class AddressBook {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		AddressBook Book1 = new AddressBook();
-		BuddyInfo buddy1 = new BuddyInfo("Sam");
+		BuddyInfo buddy1 = new BuddyInfo("Sam J English");
 		Book1.addBuddy(buddy1);	
 		Book1.removeBuddy(0);
 		
