@@ -1,27 +1,28 @@
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AddressBook {
-	private Map<String, BuddyInfo> Book;
+	private List<BuddyInfo> addressBook = new ArrayList<BuddyInfo>();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		AddressBook Book1 = new AddressBook();
 		BuddyInfo buddy1 = new BuddyInfo("Sam");
-		BuddyInfo buddy2 = new BuddyInfo("Austin");
-		BuddyInfo buddy3 = new BuddyInfo("Nikola");
-		System.out.println("Hey");
-		System.out.println("Hi");
-		Book1.addBuddy(buddy1);
-		Book1.addBuddy(buddy2);
-		Book1.addBuddy(buddy3);
-		Book1.removeBuddy(buddy3);
+		Book1.addBuddy(buddy1);	
+		Book1.removeBuddy(0);
 	}
 	
 	public void addBuddy(BuddyInfo newBuddy) {
-			Book.put(newBuddy.getName(), newBuddy);
+		if(newBuddy != null) {
+			this.addressBook.add(newBuddy);
+		}
+
 	}
-	public void removeBuddy(BuddyInfo oldBuddy) {
-			Book.remove(oldBuddy.getName(), oldBuddy);
+	public BuddyInfo removeBuddy(int index) {
+		if(index >= 0 && index < this.addressBook.size()) {
+			return this.addressBook.remove(index);
+		}
+		return null;
 	}
 
 }
