@@ -34,10 +34,24 @@ public class BuddyInfo {
 		@SuppressWarnings("unused")
 		BuddyInfo buddy = new BuddyInfo("Homer");
 	}
-	public BuddyInfo(String name) {
-		this.name = name;
-		System.out.println("Hello, " + name);
+	public BuddyInfo() {
+		// TODO Auto-generated constructor stub
 	}
 	
+	public BuddyInfo(String name) {
+		this.setName(name);
+	}
+	public BuddyInfo(String name, String number) {
+		this(name);
+		this.setPhoneNumber(number);
+	}
+	public BuddyInfo(String inpName, String inpNumber, String inpAddress) {
+		this(inpName, inpNumber);
+		this.setAddress(inpAddress);
+	}
+	public String toString() {
+		return this.name + "\n" + this.phoneNumber + "\n" + this.address;
+		
+	}
 
 }
