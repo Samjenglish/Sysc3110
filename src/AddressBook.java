@@ -105,7 +105,7 @@ public class AddressBook extends JFrame{
 		               String currentEntries = "";
 		               int count = 1;
 		               for(BuddyInfo f: currentBook.addressBook ) {
-		            	   currentEntries +="Buddy " + count + ": \n" + f.toString() + "\n";
+		            	   currentEntries +="Buddy " + count + ": \n" + f.toString() + "\n\n";
 		            	   count++;
 		               }
 		               displayEntries.setText(currentEntries);
@@ -121,7 +121,7 @@ public class AddressBook extends JFrame{
 				               String currentEntries = "";
 				               int count = 1;
 				               for(BuddyInfo f: currentBook.addressBook ) {
-				            	   currentEntries +="Buddy " + count + ": " + f.toString() + "\n";
+				            	   currentEntries +="Buddy " + count + ": " + f.toString() + "\n\n";
 				            	   count++;
 				               }
 				              out.write(currentEntries);
