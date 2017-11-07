@@ -70,9 +70,7 @@ public class View extends JFrame{
 		      buddyList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		      JScrollPane displayPane= new JScrollPane(buddyList);
 		      displayPane.setSize(this.getSize());
-		      
-		      
-		      
+		     		      
 		      buddyList.addListSelectionListener(new ListSelectionListener() {
 		    	    @Override
 		    	    public void valueChanged(ListSelectionEvent e)
@@ -80,6 +78,7 @@ public class View extends JFrame{
 		    	        if(!e.getValueIsAdjusting()) {
 		    	        	
 		    	            selectedBuddy = buddyList.getSelectedIndex();
+		    	            
 		    	            BuddyInfo chosenBud = viewInstance.model.seeBuddy(selectedBuddy);
 		    	            Object[] options = {"Edit", "Remove", "Cancel"};
 		    	            int selectedOption = JOptionPane.showOptionDialog(viewInstance, 
@@ -90,41 +89,20 @@ public class View extends JFrame{
 		    	            		null, 
 		    	            		options, 
 		    	            		options[2]);
-		    	            if(selectedOption == 0) {
-		    	            	
-		    	                JTextField field1 = new JTextField(chosenBud.getName());
-		    	                JTextField field2 = new JTextField(chosenBud.getPhoneNumber());
-		    	                JTextField field3 = new JTextField(chosenBud.getAddress());
-		    	                JPanel panel = new JPanel(new GridLayout(0, 1));
-		    	                
-		    	                panel.add(new JLabel("Name:"));
-		    	                panel.add(field1);
-		    	                panel.add(new JLabel("Number:"));
-		    	                panel.add(field2);
-		    	                panel.add(new JLabel("Address:"));
-		    	                panel.add(field3);
-		    	                int result = JOptionPane.showConfirmDialog(null, panel, "Editing Entry",
-		    	                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-		    	                if (result == JOptionPane.OK_OPTION) {
-		    	                    chosenBud.setName(field1.getText());
-		    	                    chosenBud.setPhoneNumber(field2.getText());
-		    	                    chosenBud.setAddress(field3.getText());
-		    	                } else {
-		    	                    System.out.println("Cancelled");
-		    	                }
-		    	                viewInstance.update();
+		    	            if(selectedOption == 0) { 	            	
+		    	               viewInstance.editEntry(chosenBud);
+
 		    	            }
 		    	            else if(selectedOption == 1) {
 		    	            	viewInstance.model.removeBuddy(selectedBuddy);
 		    	            	viewInstance.update();
 		    	            }
 		    	            else {
-		    	            	buddyList.clearSelection();
 		    	            	System.out.println("Cancelled");
-		    	            }
+		    	            }  
 		    	            
-		    	           
 		    	        }
+            
 		    	    }
 		    	});   
 		      displayView.add(displayPane);
@@ -194,21 +172,53 @@ public class View extends JFrame{
 		            	
 			  
 	}
+	private void editEntry(BuddyInfo chosenBud) {
+		
+		 JTextField field1 = new JTextField(chosenBud.getName());
+         JTextField field2 = new JTextField(chosenBud.getPhoneNumber());
+         JTextField field3 = new JTextField(chosenBud.getAddress());
+         JPanel panel = new JPanel(new GridLayout(0, 1));
+         
+         panel.add(new JLabel("Name:"));
+         panel.add(field1);
+         panel.add(new JLabel("Number:"));
+         panel.add(field2);
+         panel.add(new JLabel("Address:"));
+         panel.add(field3);
+         
+         int result = JOptionPane.showConfirmDialog(null, panel, "Editing Entry",
+             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+         if (result == JOptionPane.OK_OPTION) {
+             chosenBud.setName(field1.getText());
+             chosenBud.setPhoneNumber(field2.getText());
+             chosenBud.setAddress(field3.getText());
+             field1.setText("");
+             field2.setText("");
+             field3.setText("");
+             viewInstance.update();
+         } else {
+             System.out.println("Cancelled");
+         }
+		
+	}
 	private void switchPane(JPanel newPane) {
 		this.setContentPane(newPane);
-		this.invalidate();
-		this.validate();
+		refresh();
 	}
 
 	public void update() {
 		if(listModel.isEmpty() != true) {
 			listModel.clear();
 		}
-		
 		int count = 0;
 		for(BuddyInfo f:  viewInstance.model.getBookList()) {
      	   listModel.addElement(f.toString());
      	   count++;
         }
+		
+	}
+	public void refresh(){
+		this.invalidate();
+		this.validate();
 	}
 }
