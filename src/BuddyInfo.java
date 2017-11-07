@@ -31,8 +31,6 @@ public class BuddyInfo {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		@SuppressWarnings("unused")
-		BuddyInfo buddy = new BuddyInfo("Homer");
 	}
 	public BuddyInfo() {
 		// TODO Auto-generated constructor stub
@@ -50,7 +48,7 @@ public class BuddyInfo {
 		this.setAddress(inpAddress);
 	}
 	public String toString() {
-		return this.name + "\n" + this.phoneNumber + "\n" + this.address;
+		return this.name + " \n" + this.phoneNumber + " \n" + this.address;
 		
 	}
 
