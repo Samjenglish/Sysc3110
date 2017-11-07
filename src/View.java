@@ -21,7 +21,7 @@ public class View extends JFrame{
 	private JPanel displayView;
 	private JMenuItem createM, saveM, displayM; 
 	private JTextField addressInput, nameInput, numberInput;
-	
+	private boolean guiChange;
 	private int selectedBuddy;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -30,6 +30,7 @@ public class View extends JFrame{
 	}
 	public View() {
 		 	//Create Panel
+			  guiChange = false;
 			  viewInstance = this;
 			  createView = new JPanel(new FlowLayout());
 		 	  JPanel createPane = new JPanel();
@@ -75,6 +76,9 @@ public class View extends JFrame{
 		    	    @Override
 		    	    public void valueChanged(ListSelectionEvent e)
 		    	    {	
+		    	    	if(guiChange) {
+		    	    		return;
+		    	    	}
 		    	        if(!e.getValueIsAdjusting()) {
 		    	        	
 		    	            selectedBuddy = buddyList.getSelectedIndex();
@@ -211,15 +215,22 @@ public class View extends JFrame{
 	}
 
 	public void update() {
-		if(listModel.isEmpty() != true) {
-			listModel.clear();
+		try {
+		    guiChange = true;
+		    
+			if(listModel.isEmpty() != true) {
+				listModel.clear();
+			}
+			buddyList.clearSelection();
+			int count = 0;
+			for(BuddyInfo f:  viewInstance.model.getBookList()) {
+	     	   listModel.addElement(f.toString());
+	     	   count++;
+	        }
+		} finally {
+		    guiChange = false;
 		}
-		buddyList.clearSelection();
-		int count = 0;
-		for(BuddyInfo f:  viewInstance.model.getBookList()) {
-     	   listModel.addElement(f.toString());
-     	   count++;
-        }
+
 		
 	}
 	public void refresh(){
