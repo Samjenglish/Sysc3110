@@ -78,28 +78,8 @@ public class View extends JFrame{
 		    	        if(!e.getValueIsAdjusting()) {
 		    	        	
 		    	            selectedBuddy = buddyList.getSelectedIndex();
-		    	            
 		    	            BuddyInfo chosenBud = viewInstance.model.seeBuddy(selectedBuddy);
-		    	            Object[] options = {"Edit", "Remove", "Cancel"};
-		    	            int selectedOption = JOptionPane.showOptionDialog(viewInstance, 
-		    	            		"What would you like to do with this entry?", 
-		    	            		"Entry Selected", 
-		    	            		JOptionPane.YES_NO_CANCEL_OPTION, 
-		    	            		JOptionPane.QUESTION_MESSAGE, 
-		    	            		null, 
-		    	            		options, 
-		    	            		options[2]);
-		    	            if(selectedOption == 0) { 	            	
-		    	               viewInstance.editEntry(chosenBud);
-
-		    	            }
-		    	            else if(selectedOption == 1) {
-		    	            	viewInstance.model.removeBuddy(selectedBuddy);
-		    	            	viewInstance.update();
-		    	            }
-		    	            else {
-		    	            	System.out.println("Cancelled");
-		    	            }  
+		    	            viewInstance.entryChoice(chosenBud);
 		    	            
 		    	        }
             
@@ -172,6 +152,30 @@ public class View extends JFrame{
 		            	
 			  
 	}
+	private void entryChoice(BuddyInfo chosenBud) {
+		 JTextField field1 = new JTextField("What would you like to do with the selected entry?");
+         JPanel entryPanel = new JPanel(new GridLayout(0, 1));
+         JButton edit = new JButton("Edit");
+         JButton remove = new JButton("Remove");
+         edit.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	        	 viewInstance.editEntry(chosenBud);
+	         }
+         });
+         remove.addActionListener(new ActionListener() {
+	         public void actionPerformed(ActionEvent e) {
+	         viewInstance.model.removeBuddy(selectedBuddy);   	
+	         }
+         });
+         entryPanel.add(field1);
+         entryPanel.add(edit);
+         entryPanel.add(remove);
+
+         int result = JOptionPane.showConfirmDialog(null, entryPanel, "Editing Entry",
+             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+         viewInstance.update();
+
+	}
 	private void editEntry(BuddyInfo chosenBud) {
 		
 		 JTextField field1 = new JTextField(chosenBud.getName());
@@ -210,6 +214,7 @@ public class View extends JFrame{
 		if(listModel.isEmpty() != true) {
 			listModel.clear();
 		}
+		buddyList.clearSelection();
 		int count = 0;
 		for(BuddyInfo f:  viewInstance.model.getBookList()) {
      	   listModel.addElement(f.toString());
