@@ -1,20 +1,14 @@
+package main;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class AddressBook{
-    
-    
+
 	private List<BuddyInfo> bookList;
-	private AddressBook currentBook;
-	private  int entryCount = 0;
-	private  int emptyVal = 0;
 	public void main(String[] args) {
 		// TODO Auto-generated method stub
-		
-		AddressBook Book1 = new AddressBook();
-
 	}
 
 	
@@ -39,10 +33,14 @@ public class AddressBook{
 		}
 		return null;
 	}
-
-
 	public List<BuddyInfo> getBookList() {
 		return bookList;
+	}
+	public int size() {
+		return bookList.size();
+	}
+	public void clear() {
+	  bookList.clear();
 	}
 }
 

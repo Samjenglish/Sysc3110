@@ -1,6 +1,8 @@
+package main;
 
 public class BuddyInfo {
-	private String name;
+	private String name, phoneNumber, address;
+	private int age;
 	
 	public String getName() {
 		return name;
@@ -25,15 +27,31 @@ public class BuddyInfo {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	public int getAge() {
+		return age;
+	}
 
-	private String address;
-	private String phoneNumber;
+	public void setAge(int age) {
+		this.age = age;
+	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 	}
 	public BuddyInfo() {
 		// TODO Auto-generated constructor stub
+	}
+	public BuddyInfo(BuddyInfo copy) {
+		this.name = copy.name;
+		this.phoneNumber = copy.phoneNumber;
+		this.address = copy.address;
+	}
+	
+	public String Greeting() {
+		return "Hello there, " + this.name;
+	}
+	public boolean isOver18() {
+		return (this.age >= 18);
 	}
 	
 	public BuddyInfo(String name) {
@@ -51,5 +69,6 @@ public class BuddyInfo {
 		return this.name + " \n" + this.phoneNumber + " \n" + this.address;
 		
 	}
+
 
 }
